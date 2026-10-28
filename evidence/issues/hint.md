@@ -4,19 +4,19 @@
 
 ## Mechanism and impact
 
-booking-v3 prints MM/DD/YYYY under the date field, but the form reads the date in the day-first tenant's order. Following the hint can therefore swap month and day. This differs from the shared parser bug and needs a separate fix. R-41241 is an alder.physio form report (de-DE, booking-v3) with browserLocale en-US; tenant/form context, not browser or intake, determines this category. No running-product reproduction or shipped fix has been verified.
+booking-v3 prints MM/DD/YYYY under the date field, but the form reads dates in the day-first tenant's order. Following that hint can swap month and day. R-41241 is an alder.physio form report (de-DE, booking-v3) with browserLocale en-US; use tenant/form context rather than browser or intake. No running-product reproduction or shipped fix has been verified.
 
 ## Scope and proposed fix
 
-Form-channel reports from day-first tenants running booking-v3: alder.physio, copper.studio and pale.harbour. Align the hint, validation, parsing and saved value with the tenant's date contract.
+Only form-channel reports from day-first tenants running booking-v3: alder.physio, copper.studio and pale.harbour. This ticket covers only the misleading date-format hint and the listed IDs. Align the hint, validation, date interpretation and saved value with the tenant contract.
 
 ## Acceptance
 
-A user following the displayed hint gets the intended date. Regression tests distinguish booking-v2/v3 and app/email/form, including browsers whose locale differs from the tenant. A shared-parser patch alone is not evidence this is fixed.
+A user following the displayed hint gets the intended date. Regression tests distinguish booking-v2/v3 and app/email/form, including browsers whose locale differs from the tenant. Verify this form behavior independently of other tickets.
 
 ## Counting method and sources
 
-427 export rows deduplicate by report ID to 412 reports merged into #4471. The disjoint follow-up split is parser: 374, hint: 33, timing: 4, premature: 1. The original classifier gives parser 379 and hint 33; the five body-level timing exceptions explain the difference. Intake labels are guesses, not causes. These are counts of reports, not distinct people or confirmed failures.
+Count each listed report ID once, ignoring overlapping export rows. These are report counts, not distinct people or confirmed failures. This issue covers one problem only; the KB page holds the complete reconciliation across tickets.
 
 - [Raw reports](https://github.com/tofucode-dev/mega-s01e03-what-it-shows/blob/main/src/lib/data/reports-4471.json)
 - [Tenant directory](https://github.com/tofucode-dev/mega-s01e03-what-it-shows/blob/main/src/lib/data/tenants)

@@ -2,11 +2,9 @@
 
 **Report count: 4 unique reports** in the 2026-10-04 export; received 2026-04-02 to 2026-10-04, across 4 tenants. This is a snapshot, not a live count.
 
-## Observed problem: one-day date shifts; root cause unconfirmed
+## Observed problem: one-day date shifts
 
-Four reports describe a one-day offset or differing days between Lisbon and Toronto, rather than a month/day swap. The premature-invite report R-41236 is a different problem and is tracked in its own issue. This investigation does not assert that every one-day shift shares a root cause; split further if evidence proves distinct mechanisms.
-
-The original causes.ts classifier reads tenant/channel/form but never report bodies; it places these four under parser. desk-notes.json flags them in oneDayMove. The reconciled parser ticket excludes these four and the separate premature-invite report, with no double counting.
+The listed reports describe a one-day offset or differing days between Lisbon and Toronto. The exact mechanism is unconfirmed. This ticket covers only one-day shifts, not other reported symptoms. Split further if evidence establishes distinct mechanisms.
 
 ## Evidence
 
@@ -28,7 +26,7 @@ Collect original input and intended local date, tenant/client timezones, UTC pay
 
 ## Counting method and sources
 
-427 export rows deduplicate by report ID to 412 reports merged into #4471. The disjoint follow-up split is parser: 374, hint: 33, timing: 4, premature: 1. The original classifier gives parser 379 and hint 33; the five body-level timing exceptions explain the difference. Intake labels are guesses, not causes. These are counts of reports, not distinct people or confirmed failures.
+Count each listed report ID once, ignoring overlapping export rows. These are report counts, not distinct people or confirmed failures. This issue covers one problem only; the KB page holds the complete reconciliation across tickets.
 
 - [Raw reports](https://github.com/tofucode-dev/mega-s01e03-what-it-shows/blob/main/src/lib/data/reports-4471.json)
 - [Tenant directory](https://github.com/tofucode-dev/mega-s01e03-what-it-shows/blob/main/src/lib/data/tenants)

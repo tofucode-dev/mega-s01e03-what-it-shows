@@ -4,11 +4,11 @@
 
 ## Mechanism and impact
 
-The shared parser reads month first, while these tenants write day first. Bookings/invites/reminders land on swapped month/day dates. Example R-41203: "Booked for 2 December. The invite says 12 February." For a day-first tenant, reading 02/12/2026 as MM/DD produces 12 February instead of 2 December. This mechanism is documented by the exported code; no running-product reproduction or shipped fix has been verified.
+The shared parser reads month first, while these tenants write day first. Bookings/invites/reminders land on swapped month/day dates. R-41203: "Booked for 2 December. The invite says 12 February." Reading day-first 02/12/2026 as MM/DD produces 12 February rather than 2 December. This mechanism is documented by exported code; no running-product reproduction or shipped fix has been verified.
 
 ## Scope and proposed fix
 
-Resolve the tenant locale from its directory, not the reporter's browser locale or intake tag. Exclude booking-v3 form-hint reports and the five contradictory timing reports tracked separately. Make the shared parser's contract agree with tenant date order; test app/email/booking-v2, ambiguous dates, days above 12, invalid dates and leap days. Preserve date-only semantics.
+Resolve tenant locale from the tenant directory, not browser locale or intake tag. This ticket covers only the shared parser mechanism and only the listed report IDs. Make its explicit date contract agree with tenant date order. Test app, email and booking-v2, ambiguous dates, days above twelve, invalid dates and leap days. Preserve date-only semantics.
 
 ## Acceptance
 
@@ -16,7 +16,7 @@ The intended date survives input, storage, invite generation and display across 
 
 ## Counting method and sources
 
-427 export rows deduplicate by report ID to 412 reports merged into #4471. The disjoint follow-up split is parser: 374, hint: 33, timing: 4, premature: 1. The original classifier gives parser 379 and hint 33; the five body-level timing exceptions explain the difference. Intake labels are guesses, not causes. These are counts of reports, not distinct people or confirmed failures.
+Count each listed report ID once, ignoring overlapping export rows. These are report counts, not distinct people or confirmed failures. This issue covers one problem only; the KB page holds the complete reconciliation across tickets.
 
 - [Raw reports](https://github.com/tofucode-dev/mega-s01e03-what-it-shows/blob/main/src/lib/data/reports-4471.json)
 - [Tenant directory](https://github.com/tofucode-dev/mega-s01e03-what-it-shows/blob/main/src/lib/data/tenants)
