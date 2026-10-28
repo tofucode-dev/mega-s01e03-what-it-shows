@@ -4,7 +4,7 @@ title: '#4471 follow-up: separate mechanisms, inspect timing exceptions'
 owner: tofucode-dev
 status: closed
 reviewed: 2026-10-28
-signature: 'Pawel Czubak / tofucode-dev with OpenAI gpt-6.1-sol'
+signature: 'v1.eyJzdWIiOiIyMjA2IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMyMjA3NTcsImV4cCI6MTc5MzMwNzE1N30.RreGGlvkSwu-DjEq6FA21avvqtTHNrB2jWmSEgYqoV4'
 ---
 
 <script>

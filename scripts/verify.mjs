@@ -29,7 +29,9 @@ try {
   assert.deepEqual(DEDUPE_CASES.map(({ a, b }) => c.sameCause(a, tenantOf(a), b, tenantOf(b))), [true, false, false, true, false]);
   assert.equal(e.groups.find((g) => g.key === 'hint').tenants, 3);
   const html = await fs.readFile(new URL('../rendered/kb/incidents/4471-followup/index.html', import.meta.url), 'utf8');
-  assert(html.includes(deskRef('Pawel Czubak / tofucode-dev with OpenAI gpt-6.1-sol')));
+  const page = await server.ssrLoadModule('/src/routes/kb/incidents/4471-followup/+page.svx');
+  assert(page.metadata.signature.startsWith('v1.'));
+  assert(html.includes(deskRef(page.metadata.signature)));
   assert(html.includes('<svg'));
   assert(!html.includes('<FollowupEvidence'));
   assert(!html.includes('href="undefined"'));

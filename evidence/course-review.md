@@ -60,3 +60,12 @@ Closed issue 2 with GitHub reason COMPLETED and issue 1 with NOT_PLANNED.
 The two supplementary symptom investigations were closed NOT_PLANNED to consolidate
 tracking into the preserved KB evidence, without claiming an unverified fix.
 Verified all four states and reasons with `gh issue list --state all`.
+
+## Signature correction
+
+The course rejected the human-readable signature and explicitly required the
+ticket from start-challenge as the page's frontmatter signature. The browser
+start page had not supplied that proof. Called start-challenge as directed,
+preserved the issued proof outside the repo, and used it exactly in the added
+pages' signature fields. Rebuilt the actual pages so RenderStamp derives the
+desk reference from the required signature, rather than typing a reference.
