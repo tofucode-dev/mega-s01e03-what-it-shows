@@ -16,7 +16,7 @@ A user following the displayed hint gets the intended date. Regression tests dis
 
 ## Counting method and sources
 
-427 export rows deduplicate by report ID to 412 reports merged into #4471. The disjoint follow-up split is parser: 374, hint: 33, timing: 5. The original classifier gives parser 379 and hint 33; the five body-level timing exceptions explain the difference. Intake labels are guesses, not causes. These are counts of reports, not distinct people or confirmed failures.
+427 export rows deduplicate by report ID to 412 reports merged into #4471. The disjoint follow-up split is parser: 374, hint: 33, timing: 4, premature: 1. The original classifier gives parser 379 and hint 33; the five body-level timing exceptions explain the difference. Intake labels are guesses, not causes. These are counts of reports, not distinct people or confirmed failures.
 
 - [Raw reports](https://github.com/tofucode-dev/mega-s01e03-what-it-shows/blob/main/src/lib/data/reports-4471.json)
 - [Tenant directory](https://github.com/tofucode-dev/mega-s01e03-what-it-shows/blob/main/src/lib/data/tenants)

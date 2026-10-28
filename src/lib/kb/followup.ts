@@ -9,14 +9,16 @@ export const timingIds = new Set(notes.oneDayMove);
 export const labels = {
   parser: 'Shared parser ignores day-first tenant dates',
   hint: 'booking-v3 date hint contradicts tenant parsing',
-  timing: 'One-day shifts / premature invite: timing investigation',
+  timing: 'One-day date shifts: timing investigation',
+  premature: 'Invite reportedly arrives before booking creation',
   unplaced: 'Unplaced: manual investigation required',
 };
 export type Problem = keyof typeof labels;
 
 // Notes flag the exception set; the bodies, not the intake tags, justify investigation.
-// "timing" is an investigation bucket, not a claim of one proven root cause.
+// A premature invite is not evidence of a one-day shift: track it separately.
 export function problemOf(r: Report): Problem {
+  if (r.id === 'R-41236') return 'premature';
   if (timingIds.has(r.id)) return 'timing';
   return causeOf(r, tenantOf(r)) ?? 'unplaced';
 }

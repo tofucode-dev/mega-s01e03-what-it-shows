@@ -49,12 +49,19 @@ Make the hint, validation, parser and saved value agree with the tenant's date c
 Test booking-v2 against booking-v3, form against app/email, and browsers whose locale differs from the tenant.
 Correcting only the shared parser does not correct a misleading hint.
 
-## Timing exceptions: preserve uncertainty
+## One-day shifts: preserve uncertainty
 
 Collect the intended local date, original input, tenant timezone, UTC payload, invite/reminder timestamps,
-client display timezone and booking creation time for each flagged ID. Compare Lisbon and Toronto views
+client display timezone and booking creation time for each date-shift report. Compare Lisbon and Toronto views
 of the same invite; check daylight-saving boundaries without assuming they are the cause.
-R-41236 lacks the timestamps needed to establish whether the invite actually preceded its booking.
+
+## Premature invite: separate from date shifts
+
+R-41236 says the invite arrived before booking creation. This does not report a one-day date shift,
+so it has its own issue rather than inheriting that investigation's cause or fix.
+It lacks the timestamps needed to establish whether the invite actually preceded its booking.
+Collect booking creation and invite generation/delivery timestamps, booking identity and audit records;
+check ordering, retries and correlation IDs. No specific scheduler or clock defect is proven.
 Do not discard a report simply because the current classifier has no category for its symptom.
 
 ## Queue history

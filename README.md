@@ -10,8 +10,8 @@
 
 The first commit preserves the unmodified course export. Accepted decision 0001 and the original incident,
 triage rules and cause classifier remain unchanged. The KB index discovers both added pages automatically.
-The follow-up distinguishes the original classifier's 379/33 totals from the body-aware 374/33/5 split.
-The five-report timing ticket is an unresolved investigation, not proof of a third shared root cause.
+The follow-up distinguishes the original classifier's 379/33 totals from the body-aware 374/33/4/1 split.
+Four one-day shifts and one premature invite have separate investigation tickets, not a claimed shared root cause.
 Counts cover the export through 2026-10-04, not a live queue.
 
 ### Reproduce

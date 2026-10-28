@@ -21,10 +21,11 @@
   above removes them from the parser ticket so each ID is counted once.</p>
 
 <h2>Read the exceptions before merging</h2>
-{#each groups.filter((g) => g.key === 'timing') as g}
-  <p>{g.count} reports need timing investigation. They are evidence of symptoms, not proof of a timezone,
-    daylight-saving or scheduler defect, and not proof that all share one cause. Split this investigation
-    further when timestamps or a reproduction establish distinct mechanisms.</p>
+{#each groups.filter((g) => g.key === 'timing' || g.key === 'premature') as g}
+  <h3>{g.label}</h3>
+  <p>{g.count} reports need investigation for this problem. They are evidence of symptoms, not proof of a timezone,
+    daylight-saving or scheduler defect. The premature-invite report has its own ticket, separate from date shifts.
+    Split further when timestamps or a reproduction establish distinct mechanisms.</p>
   {#each g.reports as r (r.id)}
     <h3>{r.id} · {r.tenant} · {r.channel}</h3>
     <blockquote>{r.body}</blockquote>

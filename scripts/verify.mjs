@@ -18,7 +18,7 @@ try {
     seen.set(r.id, r);
   }
   assert.deepEqual(Object.fromEntries(e.originalGroups.map((g) => [g.cause, g.reports.length])), { parser: 379, hint: 33 });
-  assert.deepEqual(Object.fromEntries(e.groups.map((g) => [g.key, g.count])), { parser: 374, hint: 33, timing: 5 });
+  assert.deepEqual(Object.fromEntries(e.groups.map((g) => [g.key, g.count])), { parser: 374, hint: 33, timing: 4, premature: 1 });
   const ids = e.groups.flatMap((g) => g.reports.map((r) => r.id));
   assert.equal(ids.length, new Set(ids).size);
   assert.equal(ids.length, e.reports.length);

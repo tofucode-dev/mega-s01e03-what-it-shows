@@ -450,18 +450,28 @@
     },
     {
       "key": "timing",
-      "label": "One-day shifts / premature invite: timing investigation",
+      "label": "One-day date shifts: timing investigation",
       "reports": [
         "R-41202",
         "R-41209",
-        "R-41236",
         "R-41344",
         "R-41620"
       ],
-      "count": 5,
-      "tenants": 5,
+      "count": 4,
+      "tenants": 4,
       "first": "2026-04-02",
       "last": "2026-10-04"
+    },
+    {
+      "key": "premature",
+      "label": "Invite reportedly arrives before booking creation",
+      "reports": [
+        "R-41236"
+      ],
+      "count": 1,
+      "tenants": 1,
+      "first": "2026-04-20",
+      "last": "2026-04-20"
     }
   ],
   "mergeDays": [
