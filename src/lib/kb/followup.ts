@@ -15,23 +15,31 @@ export const labels = {
 };
 export type Problem = keyof typeof labels;
 
-// Notes flag the exception set; the bodies, not the intake tags, justify investigation.
-// A premature invite is not evidence of a one-day shift: track it separately.
+// Ticket counts follow the exported desk view. Notes do not reassign reports.
 export function problemOf(r: Report): Problem {
-  if (r.id === 'R-41236') return 'premature';
-  if (timingIds.has(r.id)) return 'timing';
   return causeOf(r, tenantOf(r)) ?? 'unplaced';
 }
 
-export const groups = (Object.keys(labels) as Problem[]).map((key) => {
-  const members = reports.filter((r) => problemOf(r) === key);
+// These are overlapping investigation flags, not additional cause buckets.
+export function investigationOf(r: Report): Problem | null {
+  if (r.id === 'R-41236') return 'premature';
+  if (timingIds.has(r.id)) return 'timing';
+  return null;
+}
+
+function collect(key: Problem, select: (r: Report) => Problem | null) {
+  const members = reports.filter((r) => select(r) === key);
   const days = members.map((r) => r.receivedAt.slice(0, 10)).sort();
   return {
     key, label: labels[key], reports: members, count: members.length,
     tenants: new Set(members.map((r) => r.tenant)).size,
     first: days[0], last: days.at(-1),
   };
-}).filter((g) => g.count);
+}
+export const groups = (['parser', 'hint', 'unplaced'] as Problem[])
+  .map((key) => collect(key, problemOf)).filter((g) => g.count);
+export const investigations = (['timing', 'premature'] as Problem[])
+  .map((key) => collect(key, investigationOf)).filter((g) => g.count);
 
 export const mergeDays = [...Map.groupBy(reports, (r) => r.mergedAt?.slice(0, 10) ?? 'missing')]
   .map(([day, rs]) => ({ day, count: rs.length }))

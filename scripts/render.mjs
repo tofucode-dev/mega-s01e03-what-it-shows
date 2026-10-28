@@ -60,6 +60,7 @@ export async function build() {
       rows: evidence.exportRows, unique: evidence.reports.length,
       originalGroups: evidence.originalGroups.map((g) => ({ cause: g.cause, count: g.reports.length, tags: g.taggedAs })),
       problems: evidence.groups.map((g) => ({ ...g, reports: g.reports.map((r) => r.id) })),
+      overlappingInvestigations: evidence.investigations.map((g) => ({ ...g, reports: g.reports.map((r) => r.id) })),
       mergeDays: evidence.mergeDays,
     }, null, 2) + '\n');
   } finally { await server.close(); }

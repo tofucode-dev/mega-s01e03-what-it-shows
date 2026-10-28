@@ -18,7 +18,10 @@ try {
     seen.set(r.id, r);
   }
   assert.deepEqual(Object.fromEntries(e.originalGroups.map((g) => [g.cause, g.reports.length])), { parser: 379, hint: 33 });
-  assert.deepEqual(Object.fromEntries(e.groups.map((g) => [g.key, g.count])), { parser: 374, hint: 33, timing: 4, premature: 1 });
+  assert.deepEqual(Object.fromEntries(e.groups.map((g) => [g.key, g.count])), { parser: 379, hint: 33 });
+  assert.deepEqual(Object.fromEntries(e.investigations.map((g) => [g.key, g.count])), { timing: 4, premature: 1 });
+  const parserIds = new Set(e.groups.find((g) => g.key === 'parser').reports.map((r) => r.id));
+  assert(e.investigations.every((g) => g.reports.every((r) => parserIds.has(r.id))));
   const ids = e.groups.flatMap((g) => g.reports.map((r) => r.id));
   assert.equal(ids.length, new Set(ids).size);
   assert.equal(ids.length, e.reports.length);
@@ -30,7 +33,7 @@ try {
   assert(html.includes('<svg'));
   assert(!html.includes('<FollowupEvidence'));
   assert(!html.includes('href="undefined"'));
-  assert(html.includes('374') && html.includes('33'));
+  assert(html.includes('379') && html.includes('33'));
   const index = await fs.readFile(new URL('../rendered/kb/index.html', import.meta.url), 'utf8');
   assert(index.includes('/kb/incidents/4471-followup'));
   assert(index.includes('/kb/decisions/0002-dedupe-by-evidence'));

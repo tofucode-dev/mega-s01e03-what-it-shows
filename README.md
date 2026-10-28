@@ -10,8 +10,9 @@
 
 The first commit preserves the unmodified course export. Accepted decision 0001 and the original incident,
 triage rules and cause classifier remain unchanged. The KB index discovers both added pages automatically.
-The follow-up distinguishes the original classifier's 379/33 totals from the body-aware 374/33/4/1 split.
-Four one-day shifts and one premature invite have separate investigation tickets, not a claimed shared root cause.
+The follow-up reproduces the desk's exported counts: parser 379 and form hint 33.
+Four one-day shifts and one premature invite are flagged within the parser total, not subtracted from it.
+Their supplementary investigation tickets do not assert a shared root cause or add reports to the total.
 Counts cover the export through 2026-10-04, not a live queue.
 
 ### Reproduce

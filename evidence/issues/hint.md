@@ -2,6 +2,8 @@
 
 **Report count: 33 unique reports** in the 2026-10-04 export; received 2026-04-17 to 2026-09-22, across 3 tenants. This is a snapshot, not a live count.
 
+Count follows the exported CauseTable: unique report IDs, tenant locale and booking-form/channel context. Desk-note flags are footnotes, not count reassignments.
+
 ## Mechanism and impact
 
 booking-v3 prints MM/DD/YYYY under the date field, but the form reads dates in the day-first tenant's order. Following that hint can swap month and day. R-41241 is an alder.physio form report (de-DE, booking-v3) with browserLocale en-US; use tenant/form context rather than browser or intake. No running-product reproduction or shipped fix has been verified.

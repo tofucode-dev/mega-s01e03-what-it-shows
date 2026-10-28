@@ -2,6 +2,8 @@
 
 **Report count: 1 unique reports** in the 2026-10-04 export; received 2026-04-20 to 2026-04-20, across 1 tenants. This is a snapshot, not a live count.
 
+Supplementary symptom investigation: these IDs remain counted in issue #2 under the exported desk view. Do not add this count to the two cause-ticket totals.
+
 ## Observed problem: invite reportedly arrived before its booking
 
 R-41236, nine.lanterns, app, received 2026-04-20T11:52:00+02:00:

@@ -3,7 +3,7 @@ import { runtime } from './render.mjs';
 
 const { server } = await runtime();
 try {
-  const { groups } = await server.ssrLoadModule('/src/lib/kb/followup.ts');
+  const { groups, investigations } = await server.ssrLoadModule('/src/lib/kb/followup.ts');
   const base = 'https://github.com/tofucode-dev/mega-s01e03-what-it-shows/blob/main/';
   const descriptions = {
     parser: `## Mechanism and impact
@@ -12,7 +12,7 @@ The shared parser reads month first, while these tenants write day first. Bookin
 
 ## Scope and proposed fix
 
-Resolve tenant locale from the tenant directory, not browser locale or intake tag. This ticket covers only the shared parser mechanism and only the listed report IDs. Make its explicit date contract agree with tenant date order. Test app, email and booking-v2, ambiguous dates, days above twelve, invalid dates and leap days. Preserve date-only semantics.
+Resolve tenant locale from the tenant directory, not browser locale or intake tag. This ticket covers the shared parser cause as counted by the exported desk view. Five reports have contradictory symptoms and are footnoted, but remain counted where filed; this is a report count, not proof of 379 identical failures. Make the explicit date contract agree with tenant date order. Test app, email and booking-v2, ambiguous dates, days above twelve, invalid dates and leap days. Preserve date-only semantics.
 
 ## Acceptance
 
@@ -34,7 +34,7 @@ The listed reports describe a one-day offset or differing days between Lisbon an
 
 ## Evidence
 
-${groups.find((g) => g.key === 'timing').reports.map((r) => `- **${r.id}**, ${r.tenant}, ${r.channel}, received ${r.receivedAt}:\n  > ${r.body}`).join('\n\n')}
+${investigations.find((g) => g.key === 'timing').reports.map((r) => `- **${r.id}**, ${r.tenant}, ${r.channel}, received ${r.receivedAt}:\n  > ${r.body}`).join('\n\n')}
 
 ## Investigation and acceptance
 
@@ -52,10 +52,12 @@ This ticket covers only the reported event-ordering problem and only R-41236. No
 Collect booking creation and invite generation/delivery timestamps, booking identity, audit logs and correlation IDs. Check event ordering, retries and which booking the invite references. Establish whether the claimed ordering is real before assigning a fix. Reproduce any established ordering failure and verify it is resolved before closing.`,
   };
   await fs.mkdir(new URL('../evidence/issues/', import.meta.url), { recursive: true });
-  for (const g of groups) {
+  for (const g of [...groups, ...investigations]) {
     const body = `# #4471 follow-up: ${g.label}
 
 **Report count: ${g.count} unique reports** in the 2026-10-04 export; received ${g.first} to ${g.last}, across ${g.tenants} tenants. This is a snapshot, not a live count.
+
+${g.key === 'timing' || g.key === 'premature' ? 'Supplementary symptom investigation: these IDs remain counted in issue #2 under the exported desk view. Do not add this count to the two cause-ticket totals.' : 'Count follows the exported CauseTable: unique report IDs, tenant locale and booking-form/channel context. Desk-note flags are footnotes, not count reassignments.'}
 
 ${descriptions[g.key]}
 

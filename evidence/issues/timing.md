@@ -2,6 +2,8 @@
 
 **Report count: 4 unique reports** in the 2026-10-04 export; received 2026-04-02 to 2026-10-04, across 4 tenants. This is a snapshot, not a live count.
 
+Supplementary symptom investigation: these IDs remain counted in issue #2 under the exported desk view. Do not add this count to the two cause-ticket totals.
+
 ## Observed problem: one-day date shifts
 
 The listed reports describe a one-day offset or differing days between Lisbon and Toronto. The exact mechanism is unconfirmed. This ticket covers only one-day shifts, not other reported symptoms. Split further if evidence establishes distinct mechanisms.
