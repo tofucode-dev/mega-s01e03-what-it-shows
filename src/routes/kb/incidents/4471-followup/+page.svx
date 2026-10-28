@@ -2,7 +2,7 @@
 layout: runbook
 title: '#4471 follow-up: separate mechanisms, inspect timing exceptions'
 owner: tofucode-dev
-status: investigating
+status: closed
 reviewed: 2026-10-28
 signature: 'Pawel Czubak / tofucode-dev with OpenAI gpt-6.1-sol'
 ---
@@ -16,8 +16,9 @@ signature: 'Pawel Czubak / tofucode-dev with OpenAI gpt-6.1-sol'
 
 <Callout kind="warn">
 The original incident's “one issue, one fix queued” is not supported by its own rendered cause table.
-Two date-format mechanisms need separate fixes. Body-level timing exceptions need investigation;
-the desk still files and counts them under the parser cause. No fix has been verified by this export.
+Two date-format mechanisms require distinct outcomes. Engineering later reported the parser fixed and
+the form hint won't-fix because booking-v3 was retired. Body-level timing exceptions remain unverified;
+the desk still files and counts them under the parser cause. The export alone verifies no product fix.
 </Callout>
 
 This follow-up supersedes the triage advice in [the original incident](/kb/incidents/4471),
@@ -81,7 +82,9 @@ Read the body first. Resolve tenant locale and booking-form version, then identi
 Different subjects can share a cause; identical subjects can conceal different bugs. With an unknown tenant
 or contradictory symptoms, keep the report for manual investigation. Never merge two unknowns as though
 “no cause” meant “same cause”. Count distinct report IDs only, retain original timestamps, and refresh from
-the desk's next export before using these counts as current. Keep each issue open until its own fix is tested.
+the desk's next export before using these counts as current. Close each ticket with its actual recorded
+outcome: completed for the reported parser fix, not planned for the retired booking-v3 hint.
+Never treat a shared “closed” state as proof that every problem was fixed.
 
 Signed by Pawel Czubak / tofucode-dev with OpenAI gpt-6.1-sol.
 

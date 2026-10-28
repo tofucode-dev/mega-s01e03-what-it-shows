@@ -16,6 +16,10 @@ Resolve tenant locale from the tenant directory, not browser locale or intake ta
 
 The intended date survives input, storage, invite generation and display across affected tenant locales, with regression tests. Do not close merely because a fix is queued.
 
+## Latest recorded outcome
+
+The [course engineering update](https://hq.mega.dev/challenges/what-it-shows), observed 2026-10-28, reports #4471 · closed 05 oct: **fixed** — fix(dates): parse dd/mm for eu locales. Close this ticket as **completed**. This is engineering's report, not an independently run product test.
+
 ## Counting method and sources
 
 Count each listed report ID once, ignoring overlapping export rows. These are report counts, not distinct people or confirmed failures. This issue covers one problem only; the KB page holds the complete reconciliation across tickets.

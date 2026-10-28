@@ -16,6 +16,10 @@ Only form-channel reports from day-first tenants running booking-v3: alder.physi
 
 A user following the displayed hint gets the intended date. Regression tests distinguish booking-v2/v3 and app/email/form, including browsers whose locale differs from the tenant. Verify this form behavior independently of other tickets.
 
+## Latest recorded outcome
+
+The [course engineering update](https://hq.mega.dev/challenges/what-it-shows), observed 2026-10-28, reports #4471 · closed 05 oct: **won't fix** — booking-v3 form retired. Close this ticket as **not planned**. This is engineering's report, not an independently run product test.
+
 ## Counting method and sources
 
 Count each listed report ID once, ignoring overlapping export rows. These are report counts, not distinct people or confirmed failures. This issue covers one problem only; the KB page holds the complete reconciliation across tickets.

@@ -40,3 +40,23 @@ explicitly specifies. Four one-day shifts and one premature invite remain flagge
 in supplementary investigations. Their counts overlap the parser ticket and must
 not be added to the two cause totals. The earlier 374/33/4/1 disjoint classification
 was our interpretation, not the desk's exported view, and is superseded.
+
+## Tickets accepted; later engineering update
+
+The course then said:
+
+> Step one passed: the course accepted your tickets. Not solved yet. When the work on #4471 is done, close your tickets, then send the repo again.
+
+Re-reading the Challenge page revealed a new engineering update:
+
+> #4471 · closed 05 oct
+
+> parser — fixed — fix(dates): parse dd/mm for eu locales
+
+> hint — won't fix — booking-v3 form retired
+
+Recorded its source and exact status/reason strings in `src/lib/data/engineering-update.json`.
+Closed issue 2 with GitHub reason COMPLETED and issue 1 with NOT_PLANNED.
+The two supplementary symptom investigations were closed NOT_PLANNED to consolidate
+tracking into the preserved KB evidence, without claiming an unverified fix.
+Verified all four states and reasons with `gh issue list --state all`.

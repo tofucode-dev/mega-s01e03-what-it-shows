@@ -14,6 +14,10 @@ The follow-up reproduces the desk's exported counts: parser 379 and form hint 33
 Four one-day shifts and one premature invite are flagged within the parser total, not subtracted from it.
 Their supplementary investigation tickets do not assert a shared root cause or add reports to the total.
 Counts cover the export through 2026-10-04, not a live queue.
+The later [engineering update](src/lib/data/engineering-update.json) says #4471 closed 05 oct:
+parser fixed; hint won't fix because booking-v3 was retired. These are distinct outcomes,
+not a claim that every closed ticket received a fix. Supplementary symptom evidence is retained,
+without claiming it was resolved.
 
 ### Reproduce
 

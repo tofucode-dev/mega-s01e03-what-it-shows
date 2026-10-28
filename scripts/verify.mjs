@@ -34,6 +34,9 @@ try {
   assert(!html.includes('<FollowupEvidence'));
   assert(!html.includes('href="undefined"'));
   assert(html.includes('379') && html.includes('33'));
+  assert(html.includes('fix(dates): parse dd/mm for eu locales'));
+  assert(html.includes('booking-v3 form retired'));
+  assert(html.includes('GitHub closure: completed') && html.includes('GitHub closure: not planned'));
   const index = await fs.readFile(new URL('../rendered/kb/index.html', import.meta.url), 'utf8');
   assert(index.includes('/kb/incidents/4471-followup'));
   assert(index.includes('/kb/decisions/0002-dedupe-by-evidence'));

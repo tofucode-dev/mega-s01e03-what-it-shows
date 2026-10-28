@@ -16,6 +16,10 @@ This ticket covers only the reported event-ordering problem and only R-41236. No
 
 Collect booking creation and invite generation/delivery timestamps, booking identity, audit logs and correlation IDs. Check event ordering, retries and which booking the invite references. Establish whether the claimed ordering is real before assigning a fix. Reproduce any established ordering failure and verify it is resolved before closing.
 
+## Latest recorded outcome
+
+Close supplementary tracking as **not planned**, consolidating the original evidence into the signed KB follow-up. No independent cause or verified fix was established for these symptoms; closure does not mean they were fixed.
+
 ## Counting method and sources
 
 Count each listed report ID once, ignoring overlapping export rows. These are report counts, not distinct people or confirmed failures. This issue covers one problem only; the KB page holds the complete reconciliation across tickets.

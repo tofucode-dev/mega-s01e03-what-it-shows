@@ -4,6 +4,7 @@ import { runtime } from './render.mjs';
 const { server } = await runtime();
 try {
   const { groups, investigations } = await server.ssrLoadModule('/src/lib/kb/followup.ts');
+  const update = JSON.parse(await fs.readFile(new URL('../src/lib/data/engineering-update.json', import.meta.url), 'utf8'));
   const base = 'https://github.com/tofucode-dev/mega-s01e03-what-it-shows/blob/main/';
   const descriptions = {
     parser: `## Mechanism and impact
@@ -60,6 +61,10 @@ Collect booking creation and invite generation/delivery timestamps, booking iden
 ${g.key === 'timing' || g.key === 'premature' ? 'Supplementary symptom investigation: these IDs remain counted in issue #2 under the exported desk view. Do not add this count to the two cause-ticket totals.' : 'Count follows the exported CauseTable: unique report IDs, tenant locale and booking-form/channel context. Desk-note flags are footnotes, not count reassignments.'}
 
 ${descriptions[g.key]}
+
+## Latest recorded outcome
+
+${update[g.key] ? `The [course engineering update](${update.source}), observed ${update.observed}, reports ${update.ticket}: **${update[g.key].status}** — ${update[g.key].reason}. Close this ticket as **${update[g.key].githubReason}**. This is engineering's report, not an independently run product test.` : 'Close supplementary tracking as **not planned**, consolidating the original evidence into the signed KB follow-up. No independent cause or verified fix was established for these symptoms; closure does not mean they were fixed.'}
 
 ## Counting method and sources
 

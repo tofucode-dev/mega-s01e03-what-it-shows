@@ -26,6 +26,10 @@ The listed reports describe a one-day offset or differing days between Lisbon an
 
 Collect original input and intended local date, tenant/client timezones, UTC payload and invite/reminder timestamps for each ID. Compare Lisbon/Toronto displays of the same event and check DST boundaries; neither timezone nor DST is proven. Link reproductions and confirmed mechanisms before assigning a fix or closing.
 
+## Latest recorded outcome
+
+Close supplementary tracking as **not planned**, consolidating the original evidence into the signed KB follow-up. No independent cause or verified fix was established for these symptoms; closure does not mean they were fixed.
+
 ## Counting method and sources
 
 Count each listed report ID once, ignoring overlapping export rows. These are report counts, not distinct people or confirmed failures. This issue covers one problem only; the KB page holds the complete reconciliation across tickets.
