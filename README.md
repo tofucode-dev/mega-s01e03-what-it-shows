@@ -1,5 +1,40 @@
 # kb — the support knowledge base
 
+## S01E03 follow-up
+
+- [Signed follow-up source](src/routes/kb/incidents/4471-followup/+page.svx)
+- [Rendered follow-up HTML](rendered/kb/incidents/4471-followup/index.html) — download and open locally, or serve `rendered/` with a static server. This is actual Svelte server-rendered output, not a screenshot or a hand-written approximation. Interactive controls on the historical triage page are static in this export.
+- [Public tickets](https://github.com/tofucode-dev/mega-s01e03-what-it-shows/issues)
+- [Auditable report membership](evidence/report-membership.json)
+- [Proposed replacement decision](src/routes/kb/decisions/0002-dedupe-by-evidence/+page.svx)
+
+The first commit preserves the unmodified course export. Accepted decision 0001 and the original incident,
+triage rules and cause classifier remain unchanged. The KB index discovers both added pages automatically.
+The follow-up distinguishes the original classifier's 379/33 totals from the body-aware 374/33/5 split.
+The five-report timing ticket is an unresolved investigation, not proof of a third shared root cause.
+Counts cover the export through 2026-10-04, not a live queue.
+
+### Reproduce
+
+Requires Node.js 22.19 or newer and npm. Project-local build dependencies are locked in `package-lock.json`.
+
+```sh
+npm ci
+npm run build
+npm test
+```
+
+`scripts/render.mjs` compiles MDsveX and Svelte, resolves the original Vite glob imports and renders every
+KB page with its runbook layout and component CSS. It derives the report membership JSON from the same
+logic as the page. `node scripts/issue-drafts.mjs` regenerates local issue bodies but does not change GitHub.
+No build script sends reports anywhere. No GitHub Pages site has been enabled.
+
+The render uses the build machine's current date for the original layout's staleness calculation.
+The source page's signature is passed to the original `RenderStamp`, which derives the desk reference.
+Reports contain fictional course-story evidence; no sign-in links or credentials belong in this repo.
+
+---
+
 **kb** = knowledge base. What the support desk knows about how our products break, written
 down where the code can keep it honest.
 

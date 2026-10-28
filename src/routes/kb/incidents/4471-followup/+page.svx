@@ -1,0 +1,81 @@
+---
+layout: runbook
+title: '#4471 follow-up: separate mechanisms, inspect timing exceptions'
+owner: tofucode-dev
+status: investigating
+reviewed: 2026-10-28
+signature: 'Pawel Czubak / tofucode-dev with OpenAI gpt-6.1-sol'
+---
+
+<script>
+  import FollowupEvidence from '#lib/kb/FollowupEvidence.svelte';
+  import QueueTimeline from '#lib/kb/QueueTimeline.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+</script>
+
+<Callout kind="warn">
+The original incident's “one issue, one fix queued” is not supported by its own rendered cause table.
+Two date-format mechanisms need separate fixes. Body-level timing exceptions need investigation rather
+than automatic classification as month/day swaps. No fix has been verified by this export.
+</Callout>
+
+This follow-up supersedes the triage advice in [the original incident](/kb/incidents/4471),
+not its historical evidence. The source export is dated 4 October 2026; this is not a live queue.
+The application serves about 300k people, but that is not the number affected by this incident.
+Reports, tenants, and people are different units.
+
+<FollowupEvidence />
+
+## Parser: tenant dates read month first
+
+The shared parser expects month first even when the tenant's locale is day first.
+Use the tenant directory and `Intl.DateTimeFormat(...).formatToParts(...)`, not the reporter's browser locale.
+For example, R-41203 reports “Booked for 2 December. The invite says 12 February.”
+With a day-first tenant, interpreting `02/12/2026` as month/day produces that reversal.
+
+Fix the shared parser's explicit date contract. Test app, email and booking-v2 paths with ambiguous dates,
+unambiguous days above twelve, leap days, and invalid dates. Keep date-only values distinct from timestamps.
+This is a proposed fix and test plan, not a verified product reproduction.
+
+## Form hint: booking-v3 invites the wrong input
+
+For day-first tenants using booking-v3, the form prints `MM/DD/YYYY`, while the form reads dates in
+the tenant's order. Users following that hint supply month-first input to a day-first form.
+This differs from the shared parser defect. R-41241 is a form report from alder.physio (`de-DE`, booking-v3)
+whose browser says `en-US`; classify by tenant and form, not the browser or intake tag.
+
+Make the hint, validation, parser and saved value agree with the tenant's date contract.
+Test booking-v2 against booking-v3, form against app/email, and browsers whose locale differs from the tenant.
+Correcting only the shared parser does not correct a misleading hint.
+
+## Timing exceptions: preserve uncertainty
+
+Collect the intended local date, original input, tenant timezone, UTC payload, invite/reminder timestamps,
+client display timezone and booking creation time for each flagged ID. Compare Lisbon and Toronto views
+of the same invite; check daylight-saving boundaries without assuming they are the cause.
+R-41236 lacks the timestamps needed to establish whether the invite actually preceded its booking.
+Do not discard a report simply because the current classifier has no category for its symptom.
+
+## Queue history
+
+<QueueTimeline ticket={4471} />
+
+The chart computes received and merged weeks independently. A batch merge is not a batch of newly received
+reports. The current export cannot tell us which new reports arrived after it was made.
+
+## Triage from now on
+
+Subject equality is not causal equality. The old triage page is stale under its own layout's age check,
+and [decision 0001](/kb/decisions/0001-dedupe-by-subject) remains an immutable historical record.
+See [the proposed replacement](/kb/decisions/0002-dedupe-by-evidence); it is not accepted policy yet.
+
+Read the body first. Resolve tenant locale and booking-form version, then identify channel and mechanism.
+Different subjects can share a cause; identical subjects can conceal different bugs. With an unknown tenant
+or contradictory symptoms, keep the report for manual investigation. Never merge two unknowns as though
+“no cause” meant “same cause”. Count distinct report IDs only, retain original timestamps, and refresh from
+the desk's next export before using these counts as current. Keep each issue open until its own fix is tested.
+
+Signed by Pawel Czubak / tofucode-dev with OpenAI gpt-6.1-sol.
+
+<RenderStamp {signature} />

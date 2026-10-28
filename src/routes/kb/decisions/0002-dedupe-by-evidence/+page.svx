@@ -1,0 +1,33 @@
+---
+layout: runbook
+title: '0002 · Proposed replacement: deduplicate by evidence'
+owner: tofucode-dev
+status: proposed
+reviewed: 2026-10-28
+signature: 'Pawel Czubak / tofucode-dev with OpenAI gpt-6.1-sol'
+---
+
+<script>
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+## Context
+
+The subject-only rule in decision 0001 hid different mechanisms inside #4471.
+The rendered DedupeExplorer already contradicts the prose: matching subjects can have different causes,
+and different subjects can have the same cause. Unknown tenants must not be merged automatically.
+
+## Proposed decision
+
+Read bodies, resolve tenant locale, channel and booking-form version, and merge only with evidence of a
+shared mechanism. Intake tags and browser locale are hints, not authority. Contradictory symptoms stay
+under investigation. Count unique report IDs, not overlapping export rows. Preserve received and merged
+timestamps separately. Refresh counts from new exports while the desk keeps working.
+
+## Consequences
+
+Triage takes more reading, but unrelated bugs no longer inherit one another's queued fix.
+The desk must approve this proposal before it replaces accepted policy. Decision 0001 is unchanged.
+The [incident follow-up](/kb/incidents/4471-followup) records the evidence and separate tickets.
+
+<RenderStamp {signature} />
